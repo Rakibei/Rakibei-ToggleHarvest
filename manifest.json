@@ -1,7 +1,7 @@
 {
 	"name": "HarvestToggle",
 	"namespace": "Rakibei",
-	"version_number": "1.0.0",
+	"version_number": "1.1.0",
 	"description": "Toggles the harvest of node on mouse click",
 	"website_url": "",
 	"dependencies": [],
@@ -13,9 +13,22 @@
 			"optional_dependencies": [],
 			"load_before": [],
 			"incompatibilities": [],
-			"compatible_mod_loader_version": ["7.0.1", "6.2.0"],
+			"compatible_mod_loader_version": ["7.0.1"],
 			"compatible_game_version": ["1.0.07"],
-			"config_schema": {}
+			"config_schema": {
+				"$schema": "https://json-schema.org/draft/2020-12/schema",
+				"title": "Config",
+				"description": "Config for this Mod",
+				"type": "object",
+				"properties": {
+					"harvestsfx": {
+						"type": "boolean",
+						"title": "Disable Sound Effect",
+						"description": "Disables the gathering sound effect",
+						"default": false
+					}
+				}
+			}
 		}
 	}
 }

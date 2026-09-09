@@ -1,5 +1,8 @@
 extends "res://main.gd"
 
+var config = ModLoaderConfig.get_current_config("Rakibei-HarvestToggle")
+var modsfx: bool = config.data.get("harvestsfx", false)
+
 func setup_harvest_signals(button: TextureButton):
 	button.pressed.connect(_on_harvest_button_pressed.bind(button))
 	button.mouse_entered.connect(_on_harvest_button_mouse_entered.bind(button))
@@ -29,16 +32,18 @@ func _start_harvest(button: TextureButton) -> void:
 
 	harvest_held[button] = true
 
-	match type:
-		"wood": sfx.start_woodcut_sfx()
-		"stone": sfx.start_stone_sfx()
-		"fishing": sfx.start_fishing_sfx()
-		"farm": sfx.start_farm_sfx()
-		"hunting": sfx.start_hunting_sfx()
-		"iron": sfx.start_iron_sfx()
-		"gold": sfx.start_gold_sfx()
-		"magic": sfx.start_magic_swamp_sfx()
-	currently_playing_sound = type
+	ModLoaderLog.debug(str(modsfx), "HarvestToggle")
+	if modsfx == true:
+		match type:
+			"wood": sfx.start_woodcut_sfx()
+			"stone": sfx.start_stone_sfx()
+			"fishing": sfx.start_fishing_sfx()
+			"farm": sfx.start_farm_sfx()
+			"hunting": sfx.start_hunting_sfx()
+			"iron": sfx.start_iron_sfx()
+			"gold": sfx.start_gold_sfx()
+			"magic": sfx.start_magic_swamp_sfx()
+		currently_playing_sound = type
 
 	if now - last_harvest_time.get(button, 0) >= cooldown:
 		perform_harvest(type, button)
