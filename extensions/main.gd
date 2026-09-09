@@ -1,6 +1,6 @@
 extends "res://main.gd"
 
-var config = ModLoaderConfig.get_current_config("Rakibei-HarvestToggle")
+var config = ModLoaderConfig.get_current_config("Rakibei-ToggleHarvest")
 var modsfx: bool = config.data.get("harvestsfx", false)
 
 func setup_harvest_signals(button: TextureButton):
@@ -32,8 +32,7 @@ func _start_harvest(button: TextureButton) -> void:
 
 	harvest_held[button] = true
 
-	ModLoaderLog.debug(str(modsfx), "HarvestToggle")
-	if modsfx == true:
+	if modsfx == false:
 		match type:
 			"wood": sfx.start_woodcut_sfx()
 			"stone": sfx.start_stone_sfx()
